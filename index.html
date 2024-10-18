@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livros de Antoine de Saint-Exupéry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #00BFFF; /* Fundo ciano */
+            color: white;
+        }
+
+        header {
+            background-color: #005f7f;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a img {
+            vertical-align: middle;
+        }
+
+        .livros {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .livro {
+            background-color: #007f9f;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .livro img {
+            width: 200px; /* Tamanho fixo da imagem */
+            height: 300px; /* Tamanho fixo da imagem */
+            filter: brightness(0.9);
+            transition: filter 0.3s;
+        }
+
+        .livro:hover {
+            transform: scale(1.05);
+        }
+
+        .livro img:hover {
+            filter: brightness(1);
+        }
+
+        button {
+            background-color: #005f7f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #004060;
+            transform: scale(1.05);
+        }
+
+        #itens-carrinho img {
+            width: 50px; /* Tamanho fixo da imagem no carrinho */
+            height: auto; /* Altura automática para manter a proporção */
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #005f7f;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Livros de Antoine de Saint-Exupéry</h1>
+        <nav>
+            <a href="#carrinho" id="carrinho-link">
+                <img src="https://cdn-icons-png.flaticon.com/512/34/34568.png" alt="Carrinho" style="width:30px; height:30px;"> <!-- Ícone do carrinho -->
+            </a>
+        </nav>
+    </header>
+    <main>
+        <section class="livros">
+            <h2>Lista de Livros</h2>
+            <article class="livro">
+                <img src="https://m.media-amazon.com/images/I/81TmOZIXvzL._SL1500_.jpg" alt="O Pequeno Príncipe">
+                <h3>O Pequeno Príncipe</h3>
+                <button onclick="adicionarOuRemoverCarrinho('O Pequeno Príncipe', 'https://m.media-amazon.com/images/I/81TmOZIXvzL._SL1500_.jpg', this)">Adicionar ao Carrinho</button>
+            </article>
+            <article class="livro">
+                <img src="https://img.travessa.com.br/livro/GR/97/971a74e5-ee65-4c2a-ad3a-8afedbb8645a.jpg" alt="Voando à Noite">
+                <h3>Voando à Noite</h3>
+                <button onclick="adicionarOuRemoverCarrinho('Voando à Noite', 'https://img.travessa.com.br/livro/GR/97/971a74e5-ee65-4c2a-ad3a-8afedbb8645a.jpg', this)">Adicionar ao Carrinho</button>
+            </article>
+            <article class="livro">
+                <img src="https://i.ebayimg.com/images/g/7zQAAOSwYQ1jwKax/s-l1600.webp" alt="Vento, Areia e Estrelas">
+                <h3>Vento, Areia e Estrelas</h3>
+                <button onclick="adicionarOuRemoverCarrinho('Vento, Areia e Estrelas', 'https://i.ebayimg.com/images/g/7zQAAOSwYQ1jwKax/s-l1600.webp', this)">Adicionar ao Carrinho</button>
+            </article>
+            <article class="livro">
+                <img src="https://m.media-amazon.com/images/I/613Pa7rAHIL._SL1200_.jpg" alt="Correio do Sul">
+                <h3>Correio do Sul</h3>
+                <button onclick="adicionarOuRemoverCarrinho('Correio do Sul', 'https://m.media-amazon.com/images/I/613Pa7rAHIL._SL1200_.jpg', this)">Adicionar ao Carrinho</button>
+            </article>
+            <article class="livro">
+                <img src="https://m.media-amazon.com/images/I/51w6MeN+BFL.jpg" alt="Terre des Hommes">
+                <h3>Terre des Hommes</h3>
+                <button onclick="adicionarOuRemoverCarrinho('Terre des Hommes', 'https://m.media-amazon.com/images/I/51w6MeN+BFL.jpg', this)">Adicionar ao Carrinho</button>
+            </article>
+        </section>
+        <section id="carrinho">
+            <h2>Carrinho</h2>
+            <ul id="itens-carrinho"></ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Livros de Antoine de Saint-Exupéry</p>
+    </footer>
+
+    <script>
+        const carrinho = {};
+
+        function adicionarOuRemoverCarrinho(livro, imagem, botao) {
+            if (!carrinho[livro]) {
+                carrinho[livro] = imagem; // Adiciona ao carrinho
+                atualizarCarrinho();
+                botao.textContent = 'Remover do Carrinho';
+            } else {
+                delete carrinho[livro]; // Remove do carrinho
+                atualizarCarrinho();
+                botao.textContent = 'Adicionar ao Carrinho';
+            }
+        }
+
+        function atualizarCarrinho() {
+            const itensCarrinho = document.getElementById('itens-carrinho');
+            itensCarrinho.innerHTML = ''; // Limpa o carrinho
+            Object.keys(carrinho).forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `<img src="${carrinho[item]}" alt="${item}"> ${item}`;
+                itensCarrinho.appendChild(li);
+            });
+        }
+
+        // Rolagem suave para a seção do carrinho
+        document.getElementById('carrinho-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('carrinho').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

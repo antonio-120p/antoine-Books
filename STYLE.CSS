@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #00BFFF; /* Fundo ciano */
+    color: white;
+}
+
+header {
+    background-color: #005f7f;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a img {
+    vertical-align: middle;
+}
+
+.livros {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.livro {
+    background-color: #007f9f;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+}
+
+.livro img {
+    max-width: 100%;
+    filter: brightness(0.9);
+    transition: filter 0.3s;
+}
+
+.livro:hover {
+    transform: scale(1.05);
+}
+
+.livro img:hover {
+    filter: brightness(1);
+}
+
+button {
+    background-color: #005f7f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #004060;
+    transform: scale(1.05);
+}
+
+/* Estilo para as imagens no carrinho */
+#itens-carrinho img {
+    width: 150px; /* Tamanho fixo da imagem no carrinho aumentado */
+    height: auto; /* Altura automática para manter a proporção */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #005f7f;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
